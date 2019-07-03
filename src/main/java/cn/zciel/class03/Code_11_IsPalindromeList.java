@@ -6,6 +6,7 @@ import java.util.Stack;
  * @author YINZHEN
  * @date 2019/7/2 15:14
  * @Description 回文链表
+ * //TODO ERROR
  */
 public class Code_11_IsPalindromeList {
 
