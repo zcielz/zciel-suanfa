@@ -75,13 +75,143 @@ public class Code_11_IsPalindromeList {
         }
         Node n1 = head;
         Node n2 = head;
-        //找出中间位置
-        //TDOO
-
-        return true;
-
-
+        while (n2.next != null && n2.next.next != null) {   //找出中间位置
+            n1 = n1.next;
+            n2 = n2.next.next;
+        }
+        //将后半部分的指向置反 1 -> 2 -> 3 <- 4 <- 5
+        n2 = n1.next; //让n2 反指向n1
+        n1.next = null; //将中点部分和后面部分断开
+        Node n3 = null;
+        while (n2 != null) {
+            n3 = n2.next;
+            n2.next = n1; //n1作为临时指针 目的让n3指向n2
+            n1 = n2; //TODO 能否和上面合并
+            n2 = n3; //让n2指向自己原来的n2
+        }
+        //进行比较
+        n3 = n1;
+        n2 = head;
+        boolean res = true;
+        while (n1 != null && n2 != null) { //n1是右侧 n2是左侧
+            if (n1.value != n2.value) {
+                res = false;
+                break;
+            }
+            n1 = n1.next;
+            n2 = n2.next;
+        }
+        //将指针恢复
+        n1 = n3.next; //让n1指向原来的位置
+        n3.next = null;
+        while (n1 != null) {
+            n2 = n1.next; //提前占下一个位置
+            n1.next = n3;
+            n3 = n1;
+            n1 = n2;
+        }
+        return res;
     }
 
+    public static void printLinkedList(Node node) {
+        System.out.println("Linked List: ");
+        while (node != null) {
+            System.out.print(node.value + " ");
+            node = node.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        Node head = null;
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(2);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(1);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(1);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(1);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(2);
+        head.next.next.next = new Node(1);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(2);
+        head.next.next.next.next = new Node(1);
+        printLinkedList(head);
+        System.out.print(isPalindrome1(head) + " | ");
+        System.out.print(isPalindrome2(head) + " | ");
+        System.out.println(isPalindrome3(head) + " | ");
+        printLinkedList(head);
+        System.out.println("=========================");
+
+    }
 
 }
