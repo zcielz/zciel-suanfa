@@ -1,4 +1,4 @@
-package cn.zciel.class02;
+package cn.zciel.class03;
 
 import java.util.HashMap;
 import java.util.Map;
